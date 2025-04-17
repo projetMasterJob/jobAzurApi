@@ -1,29 +1,29 @@
-# name: Deploy Node.js API
+name: Deploy Node.js API
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
 
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-#     steps:
-#       - name: Clone du repository
-#         uses: actions/checkout@v3
+    steps:
+      - name: Clone du repository
+        uses: actions/checkout@v3
 
-#       - name: Installer Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: '18'
+      - name: Installer Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-#       - name: Installer les dependances
-#         run: npm install
+      - name: Installer les dépendances
+        run: npm install
 
-#       - name: Déployer sur Render
-#         run: |
-#           curl -X POST "$RENDER_DEPLOY_HOOK"
-
-#     env:
-#       RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+      - name: Déployer via l’API Render
+        run: |
+          curl -X POST https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Accept: application/json" \
+            -H "Content-Type: application/json"
