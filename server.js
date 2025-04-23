@@ -10,10 +10,10 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-const indexRoutes = require('./src/routes/index');
+const indexRoutes = require('./src/routes');
 app.use('/api', indexRoutes);
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Serveur lancé sur http://localhost:${PORT}`);
+    console.log(`Serveur lancé sur le port : ${PORT}`);
 });
