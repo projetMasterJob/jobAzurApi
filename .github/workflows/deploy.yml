@@ -21,6 +21,21 @@ jobs:
       - name: Installer les dépendances
         run: npm install
 
+      - name: Mettre à jour les variables d’environnement sur Render
+        run: |
+          curl -X PATCH https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/environment \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "envVars": [
+                { "key": "DB_HOST", "value": "${{ secrets.DB_HOST }}", "type": "plain" },
+                { "key": "DB_USER", "value": "${{ secrets.DB_USER }}", "type": "plain" },
+                { "key": "DB_PASS", "value": "${{ secrets.DB_PASS }}", "type": "plain" },
+                { "key": "DB_NAME", "value": "${{ secrets.DB_NAME }}", "type": "plain" },
+                { "key": "DB_PORT", "value": "${{ secrets.DB_PORT }}", "type": "plain" }
+              ]
+            }'
+
       - name: Déployer via l’API Render
         run: |
           curl -X POST https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys \
