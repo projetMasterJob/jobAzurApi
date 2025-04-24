@@ -9,6 +9,7 @@ const ApplicationRoute = require('./ApplicationRoute');
 const NotificationRoute = require('./NotificationRoute');
 const ChatRoute = require('./ChatRoute');
 const MessageRoute = require('./MessageRoute');
+const TestDbRoute = require ('./TestDbRoute')
 
 router.use('/users', UserRoute);
 router.use('/company', CompanyRoute);
@@ -18,5 +19,6 @@ router.use('/applications', ApplicationRoute);
 router.use('/notifications', NotificationRoute);
 router.use('/chats', ChatRoute);
 router.use('/messages', MessageRoute);
+router.use('test-db', TestDbRoute)
 
 module.exports = router;
