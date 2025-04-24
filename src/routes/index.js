@@ -19,6 +19,6 @@ router.use('/applications', ApplicationRoute);
 router.use('/notifications', NotificationRoute);
 router.use('/chats', ChatRoute);
 router.use('/messages', MessageRoute);
-router.use('test-db', TestDbRoute)
+router.use('/test-db', TestDbRoute)
 
 module.exports = router;
